@@ -1,41 +1,43 @@
-<!-- head section -->
-<!-- skin -->
-<link rel="stylesheet" href="https://releases.flowplayer.org/7.2.6/skin/skin.css">
-<!-- CDNBye hls.js -->
-<script src="//cdn.jsdelivr.net/npm/cdnbye@latest/dist/hls.light.min.js"></script>
-<!-- flowplayer -->
-<script src="//releases.flowplayer.org/7.2.6/flowplayer.min.js"></script>
+<!-- GEM Rubix -->
+<!doctype html>
+<html>
+<head>
 
-<!-- body section -->
-<div id="player"></div>
-<p id="version"></p>
-<h3>download info:</h3>
-<p id="info"></p>
-
+    <meta charset="UTF-8">
+    <!-- CDNBye Plugin -->
+    <script src="//cdn.jsdelivr.net/npm/cdnbye@latest"></script>
+    <!-- JWPlayer Hlsjs Provider -->
+    <script src="//cdn.jsdelivr.net/npm/cdnbye@latest/dist/jwplayer.provider.hls.js"></script>
+    <!-- JW Player Builds -->
+    <script src="//ssl.p.jwpcdn.com/player/v/8.21.2/jwplayer.js"></script>
+</head>
+<body>
+<header ></header>
+<center>
+    <div id="demoplayer"></div>
+</center>
 <script>
-    document.querySelector('#version').innerText = `hls.js version: ${Hls.version}  cdnbye version: ${Hls.engineVersion}`;
-    flowplayer('#player', {
-        live: true,  // set if it's a live stream
-        ratio: 9/16, // set the aspect ratio of the stream
-        clip: {
-            sources: [
-                // path to the HLS m3u8
-                { type: "application/x-mpegurl", src: "https://test-streams.mux.dev/x36xhzz/url_8/193039199_mp4_h264_aac_fhd_7.m3u8"},
-            ]
-        },
-        hlsjs: {
+    jwplayer.key = "uoW6qHjBL3KNudxKVnwa3rt5LlTakbko9e6aQ6VUyKQ=";
+    jwplayer('demoplayer').setup({
+        file: 'https://stream-live.gemonline.tv/live/rubix/index.m3u8',
+        width: 0,
+        height: 0,
+        setFullscreen:true,
+        autostart: true,
+        hlsjsConfig: {
             debug: false,
             // Other hlsjsConfig options provided by hls.js
             p2pConfig: {
                 live: true,        // set false in vod mode
                 // announceLocation: 'hk',        // if using Hongkong tracker
                 // announceLocation: 'us',        // if using USA tracker
-                getStats: function (totalP2PDownloaded, totalP2PUploaded, totalHTTPDownloaded) {
-                    var total = totalHTTPDownloaded + totalP2PDownloaded;
-                    document.querySelector('#info').innerText = `p2p ratio: ${Math.round(totalP2PDownloaded/total*100)}%, saved traffic: ${totalP2PDownloaded}KB, uploaded: ${totalP2PUploaded}KB`;
-                },
                 // Other p2pConfig options provided by CDNBye
             }
-        }
+        },
     });
+  jwplayer().on('play', function (){ jwplayer().setFullscreen(true); });
+  jwplayer().on('pause', function (){ jwplayer().setFullscreen(true); });
+
 </script>
+</body>
+</html>
