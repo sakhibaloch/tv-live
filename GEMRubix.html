@@ -23,7 +23,7 @@
         width: 1500,
         height: 1500,
         setFullscreen:true,
-        autostart: true,
+        autostart: false,
         hlsjsConfig: {
             debug: false,
             // Other hlsjsConfig options provided by hls.js
@@ -36,8 +36,6 @@
         },
     });
   jwplayer().on('play', function (){ jwplayer().setFullscreen(true); });
-  jwplayer().on('pause', function (){ jwplayer().setFullscreen(true); });
-
 </script>
 </body>
 </html>
